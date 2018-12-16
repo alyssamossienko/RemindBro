@@ -1,0 +1,27 @@
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+
+  createReminder(
+    title: String!,
+    description: String,
+    message: String
+  ): Reminder!
+  createRecipient(
+    recipientName:String!,
+    contactMethod:String,
+    contactInfo:String
+  ):Recipient!
+  connectReminderAndRecipients(
+    recipientIDs: [ID!]!
+    reminderID: ID!
+  ): Reminder
+
+  deleteAllUsers: [User!]!
+
+  createNotification(
+    reminderId: ID!,
+    isScheduled: Boolean!,
+    scheduledDelivery: DateTime!
+  ): Notification!
+}

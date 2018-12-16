@@ -1,0 +1,5 @@
+type Query {
+  allUsers: [User!]!
+  userRecipients(userId: ID!): [Recipient!]
+  userReminders(userId: ID!): [Reminder!]
+}

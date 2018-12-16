@@ -1,0 +1,15 @@
+# import User, Reminder, Recipient, Cron, Notification, Status, ContactMethod from "../generated/prisma.graphql"
+# import Query from "./query.graphql"
+# import Mutation from "./mutation.graphql"
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  reminders: [Reminder!]!
+}

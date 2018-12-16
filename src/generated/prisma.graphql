@@ -1,0 +1,2340 @@
+# source: http://localhost:4466
+# timestamp: Thu Dec 13 2018 00:07:34 GMT-0800 (PST)
+
+type AggregateCron {
+  count: Int!
+}
+
+type AggregateNotification {
+  count: Int!
+}
+
+type AggregateRecipient {
+  count: Int!
+}
+
+type AggregateReminder {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+enum ContactMethod {
+  EMAIL
+  SMS
+}
+
+type Cron implements Node {
+  id: ID!
+  plainText: String!
+  cronText: String!
+  reminder: Reminder!
+}
+
+"""A connection to a list of items."""
+type CronConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CronEdge]!
+  aggregate: AggregateCron!
+}
+
+input CronCreateInput {
+  plainText: String!
+  cronText: String!
+  reminder: ReminderCreateOneWithoutFrequencyInput!
+}
+
+input CronCreateOneWithoutReminderInput {
+  create: CronCreateWithoutReminderInput
+  connect: CronWhereUniqueInput
+}
+
+input CronCreateWithoutReminderInput {
+  plainText: String!
+  cronText: String!
+}
+
+"""An edge in a connection."""
+type CronEdge {
+  """The item at the end of the edge."""
+  node: Cron!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CronOrderByInput {
+  id_ASC
+  id_DESC
+  plainText_ASC
+  plainText_DESC
+  cronText_ASC
+  cronText_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CronPreviousValues {
+  id: ID!
+  plainText: String!
+  cronText: String!
+}
+
+type CronSubscriptionPayload {
+  mutation: MutationType!
+  node: Cron
+  updatedFields: [String!]
+  previousValues: CronPreviousValues
+}
+
+input CronSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CronSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CronSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CronSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CronWhereInput
+}
+
+input CronUpdateInput {
+  plainText: String
+  cronText: String
+  reminder: ReminderUpdateOneRequiredWithoutFrequencyInput
+}
+
+input CronUpdateManyMutationInput {
+  plainText: String
+  cronText: String
+}
+
+input CronUpdateOneWithoutReminderInput {
+  create: CronCreateWithoutReminderInput
+  connect: CronWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CronUpdateWithoutReminderDataInput
+  upsert: CronUpsertWithoutReminderInput
+}
+
+input CronUpdateWithoutReminderDataInput {
+  plainText: String
+  cronText: String
+}
+
+input CronUpsertWithoutReminderInput {
+  update: CronUpdateWithoutReminderDataInput!
+  create: CronCreateWithoutReminderInput!
+}
+
+input CronWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CronWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CronWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CronWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  plainText: String
+
+  """All values that are not equal to given value."""
+  plainText_not: String
+
+  """All values that are contained in given list."""
+  plainText_in: [String!]
+
+  """All values that are not contained in given list."""
+  plainText_not_in: [String!]
+
+  """All values less than the given value."""
+  plainText_lt: String
+
+  """All values less than or equal the given value."""
+  plainText_lte: String
+
+  """All values greater than the given value."""
+  plainText_gt: String
+
+  """All values greater than or equal the given value."""
+  plainText_gte: String
+
+  """All values containing the given string."""
+  plainText_contains: String
+
+  """All values not containing the given string."""
+  plainText_not_contains: String
+
+  """All values starting with the given string."""
+  plainText_starts_with: String
+
+  """All values not starting with the given string."""
+  plainText_not_starts_with: String
+
+  """All values ending with the given string."""
+  plainText_ends_with: String
+
+  """All values not ending with the given string."""
+  plainText_not_ends_with: String
+  cronText: String
+
+  """All values that are not equal to given value."""
+  cronText_not: String
+
+  """All values that are contained in given list."""
+  cronText_in: [String!]
+
+  """All values that are not contained in given list."""
+  cronText_not_in: [String!]
+
+  """All values less than the given value."""
+  cronText_lt: String
+
+  """All values less than or equal the given value."""
+  cronText_lte: String
+
+  """All values greater than the given value."""
+  cronText_gt: String
+
+  """All values greater than or equal the given value."""
+  cronText_gte: String
+
+  """All values containing the given string."""
+  cronText_contains: String
+
+  """All values not containing the given string."""
+  cronText_not_contains: String
+
+  """All values starting with the given string."""
+  cronText_starts_with: String
+
+  """All values not starting with the given string."""
+  cronText_not_starts_with: String
+
+  """All values ending with the given string."""
+  cronText_ends_with: String
+
+  """All values not ending with the given string."""
+  cronText_not_ends_with: String
+  reminder: ReminderWhereInput
+}
+
+input CronWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createReminder(data: ReminderCreateInput!): Reminder!
+  createCron(data: CronCreateInput!): Cron!
+  createRecipient(data: RecipientCreateInput!): Recipient!
+  createNotification(data: NotificationCreateInput!): Notification!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateReminder(data: ReminderUpdateInput!, where: ReminderWhereUniqueInput!): Reminder
+  updateCron(data: CronUpdateInput!, where: CronWhereUniqueInput!): Cron
+  updateRecipient(data: RecipientUpdateInput!, where: RecipientWhereUniqueInput!): Recipient
+  updateNotification(data: NotificationUpdateInput!, where: NotificationWhereUniqueInput!): Notification
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteReminder(where: ReminderWhereUniqueInput!): Reminder
+  deleteCron(where: CronWhereUniqueInput!): Cron
+  deleteRecipient(where: RecipientWhereUniqueInput!): Recipient
+  deleteNotification(where: NotificationWhereUniqueInput!): Notification
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertReminder(where: ReminderWhereUniqueInput!, create: ReminderCreateInput!, update: ReminderUpdateInput!): Reminder!
+  upsertCron(where: CronWhereUniqueInput!, create: CronCreateInput!, update: CronUpdateInput!): Cron!
+  upsertRecipient(where: RecipientWhereUniqueInput!, create: RecipientCreateInput!, update: RecipientUpdateInput!): Recipient!
+  upsertNotification(where: NotificationWhereUniqueInput!, create: NotificationCreateInput!, update: NotificationUpdateInput!): Notification!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyReminders(data: ReminderUpdateManyMutationInput!, where: ReminderWhereInput): BatchPayload!
+  updateManyCrons(data: CronUpdateManyMutationInput!, where: CronWhereInput): BatchPayload!
+  updateManyRecipients(data: RecipientUpdateManyMutationInput!, where: RecipientWhereInput): BatchPayload!
+  updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyReminders(where: ReminderWhereInput): BatchPayload!
+  deleteManyCrons(where: CronWhereInput): BatchPayload!
+  deleteManyRecipients(where: RecipientWhereInput): BatchPayload!
+  deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type Notification implements Node {
+  id: ID!
+  parentReminder: Reminder!
+  createdAt: DateTime!
+  scheduledDelivery: DateTime!
+  status: Status
+}
+
+"""A connection to a list of items."""
+type NotificationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [NotificationEdge]!
+  aggregate: AggregateNotification!
+}
+
+input NotificationCreateInput {
+  scheduledDelivery: DateTime!
+  status: Status
+  parentReminder: ReminderCreateOneWithoutSentRemindersInput!
+}
+
+input NotificationCreateManyWithoutParentReminderInput {
+  create: [NotificationCreateWithoutParentReminderInput!]
+  connect: [NotificationWhereUniqueInput!]
+}
+
+input NotificationCreateWithoutParentReminderInput {
+  scheduledDelivery: DateTime!
+  status: Status
+}
+
+"""An edge in a connection."""
+type NotificationEdge {
+  """The item at the end of the edge."""
+  node: Notification!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum NotificationOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  scheduledDelivery_ASC
+  scheduledDelivery_DESC
+  status_ASC
+  status_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type NotificationPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  scheduledDelivery: DateTime!
+  status: Status
+}
+
+input NotificationScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NotificationScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NotificationScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NotificationScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  scheduledDelivery: DateTime
+
+  """All values that are not equal to given value."""
+  scheduledDelivery_not: DateTime
+
+  """All values that are contained in given list."""
+  scheduledDelivery_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  scheduledDelivery_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  scheduledDelivery_lt: DateTime
+
+  """All values less than or equal the given value."""
+  scheduledDelivery_lte: DateTime
+
+  """All values greater than the given value."""
+  scheduledDelivery_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  scheduledDelivery_gte: DateTime
+  status: Status
+
+  """All values that are not equal to given value."""
+  status_not: Status
+
+  """All values that are contained in given list."""
+  status_in: [Status!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [Status!]
+}
+
+type NotificationSubscriptionPayload {
+  mutation: MutationType!
+  node: Notification
+  updatedFields: [String!]
+  previousValues: NotificationPreviousValues
+}
+
+input NotificationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NotificationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NotificationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NotificationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: NotificationWhereInput
+}
+
+input NotificationUpdateInput {
+  scheduledDelivery: DateTime
+  status: Status
+  parentReminder: ReminderUpdateOneRequiredWithoutSentRemindersInput
+}
+
+input NotificationUpdateManyDataInput {
+  scheduledDelivery: DateTime
+  status: Status
+}
+
+input NotificationUpdateManyMutationInput {
+  scheduledDelivery: DateTime
+  status: Status
+}
+
+input NotificationUpdateManyWithoutParentReminderInput {
+  create: [NotificationCreateWithoutParentReminderInput!]
+  connect: [NotificationWhereUniqueInput!]
+  disconnect: [NotificationWhereUniqueInput!]
+  delete: [NotificationWhereUniqueInput!]
+  update: [NotificationUpdateWithWhereUniqueWithoutParentReminderInput!]
+  updateMany: [NotificationUpdateManyWithWhereNestedInput!]
+  deleteMany: [NotificationScalarWhereInput!]
+  upsert: [NotificationUpsertWithWhereUniqueWithoutParentReminderInput!]
+}
+
+input NotificationUpdateManyWithWhereNestedInput {
+  where: NotificationScalarWhereInput!
+  data: NotificationUpdateManyDataInput!
+}
+
+input NotificationUpdateWithoutParentReminderDataInput {
+  scheduledDelivery: DateTime
+  status: Status
+}
+
+input NotificationUpdateWithWhereUniqueWithoutParentReminderInput {
+  where: NotificationWhereUniqueInput!
+  data: NotificationUpdateWithoutParentReminderDataInput!
+}
+
+input NotificationUpsertWithWhereUniqueWithoutParentReminderInput {
+  where: NotificationWhereUniqueInput!
+  update: NotificationUpdateWithoutParentReminderDataInput!
+  create: NotificationCreateWithoutParentReminderInput!
+}
+
+input NotificationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NotificationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NotificationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NotificationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  scheduledDelivery: DateTime
+
+  """All values that are not equal to given value."""
+  scheduledDelivery_not: DateTime
+
+  """All values that are contained in given list."""
+  scheduledDelivery_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  scheduledDelivery_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  scheduledDelivery_lt: DateTime
+
+  """All values less than or equal the given value."""
+  scheduledDelivery_lte: DateTime
+
+  """All values greater than the given value."""
+  scheduledDelivery_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  scheduledDelivery_gte: DateTime
+  status: Status
+
+  """All values that are not equal to given value."""
+  status_not: Status
+
+  """All values that are contained in given list."""
+  status_in: [Status!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [Status!]
+  parentReminder: ReminderWhereInput
+}
+
+input NotificationWhereUniqueInput {
+  id: ID
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  reminders(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Reminder]!
+  crons(where: CronWhereInput, orderBy: CronOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cron]!
+  recipients(where: RecipientWhereInput, orderBy: RecipientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipient]!
+  notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification]!
+  user(where: UserWhereUniqueInput!): User
+  reminder(where: ReminderWhereUniqueInput!): Reminder
+  cron(where: CronWhereUniqueInput!): Cron
+  recipient(where: RecipientWhereUniqueInput!): Recipient
+  notification(where: NotificationWhereUniqueInput!): Notification
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  remindersConnection(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReminderConnection!
+  cronsConnection(where: CronWhereInput, orderBy: CronOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CronConnection!
+  recipientsConnection(where: RecipientWhereInput, orderBy: RecipientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecipientConnection!
+  notificationsConnection(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NotificationConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Recipient implements Node {
+  id: ID!
+  name: String!
+  reminders(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Reminder!]
+  contactMethod: ContactMethod
+  contactInfo: String
+  user: User!
+}
+
+"""A connection to a list of items."""
+type RecipientConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [RecipientEdge]!
+  aggregate: AggregateRecipient!
+}
+
+input RecipientCreateInput {
+  name: String!
+  contactMethod: ContactMethod
+  contactInfo: String
+  reminders: ReminderCreateManyWithoutRecipientsInput
+  user: UserCreateOneWithoutRecipientInput!
+}
+
+input RecipientCreateManyWithoutRemindersInput {
+  create: [RecipientCreateWithoutRemindersInput!]
+  connect: [RecipientWhereUniqueInput!]
+}
+
+input RecipientCreateManyWithoutUserInput {
+  create: [RecipientCreateWithoutUserInput!]
+  connect: [RecipientWhereUniqueInput!]
+}
+
+input RecipientCreateWithoutRemindersInput {
+  name: String!
+  contactMethod: ContactMethod
+  contactInfo: String
+  user: UserCreateOneWithoutRecipientInput!
+}
+
+input RecipientCreateWithoutUserInput {
+  name: String!
+  contactMethod: ContactMethod
+  contactInfo: String
+  reminders: ReminderCreateManyWithoutRecipientsInput
+}
+
+"""An edge in a connection."""
+type RecipientEdge {
+  """The item at the end of the edge."""
+  node: Recipient!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum RecipientOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  contactMethod_ASC
+  contactMethod_DESC
+  contactInfo_ASC
+  contactInfo_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type RecipientPreviousValues {
+  id: ID!
+  name: String!
+  contactMethod: ContactMethod
+  contactInfo: String
+}
+
+input RecipientScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RecipientScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RecipientScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RecipientScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  contactMethod: ContactMethod
+
+  """All values that are not equal to given value."""
+  contactMethod_not: ContactMethod
+
+  """All values that are contained in given list."""
+  contactMethod_in: [ContactMethod!]
+
+  """All values that are not contained in given list."""
+  contactMethod_not_in: [ContactMethod!]
+  contactInfo: String
+
+  """All values that are not equal to given value."""
+  contactInfo_not: String
+
+  """All values that are contained in given list."""
+  contactInfo_in: [String!]
+
+  """All values that are not contained in given list."""
+  contactInfo_not_in: [String!]
+
+  """All values less than the given value."""
+  contactInfo_lt: String
+
+  """All values less than or equal the given value."""
+  contactInfo_lte: String
+
+  """All values greater than the given value."""
+  contactInfo_gt: String
+
+  """All values greater than or equal the given value."""
+  contactInfo_gte: String
+
+  """All values containing the given string."""
+  contactInfo_contains: String
+
+  """All values not containing the given string."""
+  contactInfo_not_contains: String
+
+  """All values starting with the given string."""
+  contactInfo_starts_with: String
+
+  """All values not starting with the given string."""
+  contactInfo_not_starts_with: String
+
+  """All values ending with the given string."""
+  contactInfo_ends_with: String
+
+  """All values not ending with the given string."""
+  contactInfo_not_ends_with: String
+}
+
+type RecipientSubscriptionPayload {
+  mutation: MutationType!
+  node: Recipient
+  updatedFields: [String!]
+  previousValues: RecipientPreviousValues
+}
+
+input RecipientSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RecipientSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RecipientSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RecipientSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: RecipientWhereInput
+}
+
+input RecipientUpdateInput {
+  name: String
+  contactMethod: ContactMethod
+  contactInfo: String
+  reminders: ReminderUpdateManyWithoutRecipientsInput
+  user: UserUpdateOneRequiredWithoutRecipientInput
+}
+
+input RecipientUpdateManyDataInput {
+  name: String
+  contactMethod: ContactMethod
+  contactInfo: String
+}
+
+input RecipientUpdateManyMutationInput {
+  name: String
+  contactMethod: ContactMethod
+  contactInfo: String
+}
+
+input RecipientUpdateManyWithoutRemindersInput {
+  create: [RecipientCreateWithoutRemindersInput!]
+  connect: [RecipientWhereUniqueInput!]
+  disconnect: [RecipientWhereUniqueInput!]
+  delete: [RecipientWhereUniqueInput!]
+  update: [RecipientUpdateWithWhereUniqueWithoutRemindersInput!]
+  updateMany: [RecipientUpdateManyWithWhereNestedInput!]
+  deleteMany: [RecipientScalarWhereInput!]
+  upsert: [RecipientUpsertWithWhereUniqueWithoutRemindersInput!]
+}
+
+input RecipientUpdateManyWithoutUserInput {
+  create: [RecipientCreateWithoutUserInput!]
+  connect: [RecipientWhereUniqueInput!]
+  disconnect: [RecipientWhereUniqueInput!]
+  delete: [RecipientWhereUniqueInput!]
+  update: [RecipientUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [RecipientUpdateManyWithWhereNestedInput!]
+  deleteMany: [RecipientScalarWhereInput!]
+  upsert: [RecipientUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input RecipientUpdateManyWithWhereNestedInput {
+  where: RecipientScalarWhereInput!
+  data: RecipientUpdateManyDataInput!
+}
+
+input RecipientUpdateWithoutRemindersDataInput {
+  name: String
+  contactMethod: ContactMethod
+  contactInfo: String
+  user: UserUpdateOneRequiredWithoutRecipientInput
+}
+
+input RecipientUpdateWithoutUserDataInput {
+  name: String
+  contactMethod: ContactMethod
+  contactInfo: String
+  reminders: ReminderUpdateManyWithoutRecipientsInput
+}
+
+input RecipientUpdateWithWhereUniqueWithoutRemindersInput {
+  where: RecipientWhereUniqueInput!
+  data: RecipientUpdateWithoutRemindersDataInput!
+}
+
+input RecipientUpdateWithWhereUniqueWithoutUserInput {
+  where: RecipientWhereUniqueInput!
+  data: RecipientUpdateWithoutUserDataInput!
+}
+
+input RecipientUpsertWithWhereUniqueWithoutRemindersInput {
+  where: RecipientWhereUniqueInput!
+  update: RecipientUpdateWithoutRemindersDataInput!
+  create: RecipientCreateWithoutRemindersInput!
+}
+
+input RecipientUpsertWithWhereUniqueWithoutUserInput {
+  where: RecipientWhereUniqueInput!
+  update: RecipientUpdateWithoutUserDataInput!
+  create: RecipientCreateWithoutUserInput!
+}
+
+input RecipientWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RecipientWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RecipientWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RecipientWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  contactMethod: ContactMethod
+
+  """All values that are not equal to given value."""
+  contactMethod_not: ContactMethod
+
+  """All values that are contained in given list."""
+  contactMethod_in: [ContactMethod!]
+
+  """All values that are not contained in given list."""
+  contactMethod_not_in: [ContactMethod!]
+  contactInfo: String
+
+  """All values that are not equal to given value."""
+  contactInfo_not: String
+
+  """All values that are contained in given list."""
+  contactInfo_in: [String!]
+
+  """All values that are not contained in given list."""
+  contactInfo_not_in: [String!]
+
+  """All values less than the given value."""
+  contactInfo_lt: String
+
+  """All values less than or equal the given value."""
+  contactInfo_lte: String
+
+  """All values greater than the given value."""
+  contactInfo_gt: String
+
+  """All values greater than or equal the given value."""
+  contactInfo_gte: String
+
+  """All values containing the given string."""
+  contactInfo_contains: String
+
+  """All values not containing the given string."""
+  contactInfo_not_contains: String
+
+  """All values starting with the given string."""
+  contactInfo_starts_with: String
+
+  """All values not starting with the given string."""
+  contactInfo_not_starts_with: String
+
+  """All values ending with the given string."""
+  contactInfo_ends_with: String
+
+  """All values not ending with the given string."""
+  contactInfo_not_ends_with: String
+  reminders_every: ReminderWhereInput
+  reminders_some: ReminderWhereInput
+  reminders_none: ReminderWhereInput
+  user: UserWhereInput
+}
+
+input RecipientWhereUniqueInput {
+  id: ID
+}
+
+type Reminder implements Node {
+  id: ID!
+  title: String!
+  message: String
+  description: String
+  recipients(where: RecipientWhereInput, orderBy: RecipientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipient!]
+  author: User!
+  frequency: Cron
+  sentReminders(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification!]
+  createdAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type ReminderConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ReminderEdge]!
+  aggregate: AggregateReminder!
+}
+
+input ReminderCreateInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientCreateManyWithoutRemindersInput
+  author: UserCreateOneWithoutRemindersInput!
+  frequency: CronCreateOneWithoutReminderInput
+  sentReminders: NotificationCreateManyWithoutParentReminderInput
+}
+
+input ReminderCreateManyWithoutAuthorInput {
+  create: [ReminderCreateWithoutAuthorInput!]
+  connect: [ReminderWhereUniqueInput!]
+}
+
+input ReminderCreateManyWithoutRecipientsInput {
+  create: [ReminderCreateWithoutRecipientsInput!]
+  connect: [ReminderWhereUniqueInput!]
+}
+
+input ReminderCreateOneWithoutFrequencyInput {
+  create: ReminderCreateWithoutFrequencyInput
+  connect: ReminderWhereUniqueInput
+}
+
+input ReminderCreateOneWithoutSentRemindersInput {
+  create: ReminderCreateWithoutSentRemindersInput
+  connect: ReminderWhereUniqueInput
+}
+
+input ReminderCreateWithoutAuthorInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientCreateManyWithoutRemindersInput
+  frequency: CronCreateOneWithoutReminderInput
+  sentReminders: NotificationCreateManyWithoutParentReminderInput
+}
+
+input ReminderCreateWithoutFrequencyInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientCreateManyWithoutRemindersInput
+  author: UserCreateOneWithoutRemindersInput!
+  sentReminders: NotificationCreateManyWithoutParentReminderInput
+}
+
+input ReminderCreateWithoutRecipientsInput {
+  title: String
+  message: String
+  description: String
+  author: UserCreateOneWithoutRemindersInput!
+  frequency: CronCreateOneWithoutReminderInput
+  sentReminders: NotificationCreateManyWithoutParentReminderInput
+}
+
+input ReminderCreateWithoutSentRemindersInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientCreateManyWithoutRemindersInput
+  author: UserCreateOneWithoutRemindersInput!
+  frequency: CronCreateOneWithoutReminderInput
+}
+
+"""An edge in a connection."""
+type ReminderEdge {
+  """The item at the end of the edge."""
+  node: Reminder!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ReminderOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  message_ASC
+  message_DESC
+  description_ASC
+  description_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ReminderPreviousValues {
+  id: ID!
+  title: String!
+  message: String
+  description: String
+  createdAt: DateTime!
+}
+
+input ReminderScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ReminderScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ReminderScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ReminderScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  message: String
+
+  """All values that are not equal to given value."""
+  message_not: String
+
+  """All values that are contained in given list."""
+  message_in: [String!]
+
+  """All values that are not contained in given list."""
+  message_not_in: [String!]
+
+  """All values less than the given value."""
+  message_lt: String
+
+  """All values less than or equal the given value."""
+  message_lte: String
+
+  """All values greater than the given value."""
+  message_gt: String
+
+  """All values greater than or equal the given value."""
+  message_gte: String
+
+  """All values containing the given string."""
+  message_contains: String
+
+  """All values not containing the given string."""
+  message_not_contains: String
+
+  """All values starting with the given string."""
+  message_starts_with: String
+
+  """All values not starting with the given string."""
+  message_not_starts_with: String
+
+  """All values ending with the given string."""
+  message_ends_with: String
+
+  """All values not ending with the given string."""
+  message_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+}
+
+type ReminderSubscriptionPayload {
+  mutation: MutationType!
+  node: Reminder
+  updatedFields: [String!]
+  previousValues: ReminderPreviousValues
+}
+
+input ReminderSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ReminderSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ReminderSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ReminderSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ReminderWhereInput
+}
+
+input ReminderUpdateInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientUpdateManyWithoutRemindersInput
+  author: UserUpdateOneRequiredWithoutRemindersInput
+  frequency: CronUpdateOneWithoutReminderInput
+  sentReminders: NotificationUpdateManyWithoutParentReminderInput
+}
+
+input ReminderUpdateManyDataInput {
+  title: String
+  message: String
+  description: String
+}
+
+input ReminderUpdateManyMutationInput {
+  title: String
+  message: String
+  description: String
+}
+
+input ReminderUpdateManyWithoutAuthorInput {
+  create: [ReminderCreateWithoutAuthorInput!]
+  connect: [ReminderWhereUniqueInput!]
+  disconnect: [ReminderWhereUniqueInput!]
+  delete: [ReminderWhereUniqueInput!]
+  update: [ReminderUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [ReminderUpdateManyWithWhereNestedInput!]
+  deleteMany: [ReminderScalarWhereInput!]
+  upsert: [ReminderUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input ReminderUpdateManyWithoutRecipientsInput {
+  create: [ReminderCreateWithoutRecipientsInput!]
+  connect: [ReminderWhereUniqueInput!]
+  disconnect: [ReminderWhereUniqueInput!]
+  delete: [ReminderWhereUniqueInput!]
+  update: [ReminderUpdateWithWhereUniqueWithoutRecipientsInput!]
+  updateMany: [ReminderUpdateManyWithWhereNestedInput!]
+  deleteMany: [ReminderScalarWhereInput!]
+  upsert: [ReminderUpsertWithWhereUniqueWithoutRecipientsInput!]
+}
+
+input ReminderUpdateManyWithWhereNestedInput {
+  where: ReminderScalarWhereInput!
+  data: ReminderUpdateManyDataInput!
+}
+
+input ReminderUpdateOneRequiredWithoutFrequencyInput {
+  create: ReminderCreateWithoutFrequencyInput
+  connect: ReminderWhereUniqueInput
+  update: ReminderUpdateWithoutFrequencyDataInput
+  upsert: ReminderUpsertWithoutFrequencyInput
+}
+
+input ReminderUpdateOneRequiredWithoutSentRemindersInput {
+  create: ReminderCreateWithoutSentRemindersInput
+  connect: ReminderWhereUniqueInput
+  update: ReminderUpdateWithoutSentRemindersDataInput
+  upsert: ReminderUpsertWithoutSentRemindersInput
+}
+
+input ReminderUpdateWithoutAuthorDataInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientUpdateManyWithoutRemindersInput
+  frequency: CronUpdateOneWithoutReminderInput
+  sentReminders: NotificationUpdateManyWithoutParentReminderInput
+}
+
+input ReminderUpdateWithoutFrequencyDataInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientUpdateManyWithoutRemindersInput
+  author: UserUpdateOneRequiredWithoutRemindersInput
+  sentReminders: NotificationUpdateManyWithoutParentReminderInput
+}
+
+input ReminderUpdateWithoutRecipientsDataInput {
+  title: String
+  message: String
+  description: String
+  author: UserUpdateOneRequiredWithoutRemindersInput
+  frequency: CronUpdateOneWithoutReminderInput
+  sentReminders: NotificationUpdateManyWithoutParentReminderInput
+}
+
+input ReminderUpdateWithoutSentRemindersDataInput {
+  title: String
+  message: String
+  description: String
+  recipients: RecipientUpdateManyWithoutRemindersInput
+  author: UserUpdateOneRequiredWithoutRemindersInput
+  frequency: CronUpdateOneWithoutReminderInput
+}
+
+input ReminderUpdateWithWhereUniqueWithoutAuthorInput {
+  where: ReminderWhereUniqueInput!
+  data: ReminderUpdateWithoutAuthorDataInput!
+}
+
+input ReminderUpdateWithWhereUniqueWithoutRecipientsInput {
+  where: ReminderWhereUniqueInput!
+  data: ReminderUpdateWithoutRecipientsDataInput!
+}
+
+input ReminderUpsertWithoutFrequencyInput {
+  update: ReminderUpdateWithoutFrequencyDataInput!
+  create: ReminderCreateWithoutFrequencyInput!
+}
+
+input ReminderUpsertWithoutSentRemindersInput {
+  update: ReminderUpdateWithoutSentRemindersDataInput!
+  create: ReminderCreateWithoutSentRemindersInput!
+}
+
+input ReminderUpsertWithWhereUniqueWithoutAuthorInput {
+  where: ReminderWhereUniqueInput!
+  update: ReminderUpdateWithoutAuthorDataInput!
+  create: ReminderCreateWithoutAuthorInput!
+}
+
+input ReminderUpsertWithWhereUniqueWithoutRecipientsInput {
+  where: ReminderWhereUniqueInput!
+  update: ReminderUpdateWithoutRecipientsDataInput!
+  create: ReminderCreateWithoutRecipientsInput!
+}
+
+input ReminderWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ReminderWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ReminderWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ReminderWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  message: String
+
+  """All values that are not equal to given value."""
+  message_not: String
+
+  """All values that are contained in given list."""
+  message_in: [String!]
+
+  """All values that are not contained in given list."""
+  message_not_in: [String!]
+
+  """All values less than the given value."""
+  message_lt: String
+
+  """All values less than or equal the given value."""
+  message_lte: String
+
+  """All values greater than the given value."""
+  message_gt: String
+
+  """All values greater than or equal the given value."""
+  message_gte: String
+
+  """All values containing the given string."""
+  message_contains: String
+
+  """All values not containing the given string."""
+  message_not_contains: String
+
+  """All values starting with the given string."""
+  message_starts_with: String
+
+  """All values not starting with the given string."""
+  message_not_starts_with: String
+
+  """All values ending with the given string."""
+  message_ends_with: String
+
+  """All values not ending with the given string."""
+  message_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  recipients_every: RecipientWhereInput
+  recipients_some: RecipientWhereInput
+  recipients_none: RecipientWhereInput
+  author: UserWhereInput
+  frequency: CronWhereInput
+  sentReminders_every: NotificationWhereInput
+  sentReminders_some: NotificationWhereInput
+  sentReminders_none: NotificationWhereInput
+}
+
+input ReminderWhereUniqueInput {
+  id: ID
+}
+
+enum Status {
+  SCHEDULED
+  PENDING
+  SUCCESS
+  FAILLURE
+}
+
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  reminder(where: ReminderSubscriptionWhereInput): ReminderSubscriptionPayload
+  cron(where: CronSubscriptionWhereInput): CronSubscriptionPayload
+  recipient(where: RecipientSubscriptionWhereInput): RecipientSubscriptionPayload
+  notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
+}
+
+type User implements Node {
+  id: ID!
+  email: String
+  name: String!
+  password: String!
+  reminders(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Reminder!]
+  recipient(where: RecipientWhereInput, orderBy: RecipientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipient!]
+  type: Int
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  email: String
+  name: String!
+  password: String!
+  type: Int
+  reminders: ReminderCreateManyWithoutAuthorInput
+  recipient: RecipientCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutRecipientInput {
+  create: UserCreateWithoutRecipientInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutRemindersInput {
+  create: UserCreateWithoutRemindersInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutRecipientInput {
+  email: String
+  name: String!
+  password: String!
+  type: Int
+  reminders: ReminderCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutRemindersInput {
+  email: String
+  name: String!
+  password: String!
+  type: Int
+  recipient: RecipientCreateManyWithoutUserInput
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  name_ASC
+  name_DESC
+  password_ASC
+  password_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  email: String
+  name: String!
+  password: String!
+  type: Int
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  email: String
+  name: String
+  password: String
+  type: Int
+  reminders: ReminderUpdateManyWithoutAuthorInput
+  recipient: RecipientUpdateManyWithoutUserInput
+}
+
+input UserUpdateManyMutationInput {
+  email: String
+  name: String
+  password: String
+  type: Int
+}
+
+input UserUpdateOneRequiredWithoutRecipientInput {
+  create: UserCreateWithoutRecipientInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutRecipientDataInput
+  upsert: UserUpsertWithoutRecipientInput
+}
+
+input UserUpdateOneRequiredWithoutRemindersInput {
+  create: UserCreateWithoutRemindersInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutRemindersDataInput
+  upsert: UserUpsertWithoutRemindersInput
+}
+
+input UserUpdateWithoutRecipientDataInput {
+  email: String
+  name: String
+  password: String
+  type: Int
+  reminders: ReminderUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutRemindersDataInput {
+  email: String
+  name: String
+  password: String
+  type: Int
+  recipient: RecipientUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutRecipientInput {
+  update: UserUpdateWithoutRecipientDataInput!
+  create: UserCreateWithoutRecipientInput!
+}
+
+input UserUpsertWithoutRemindersInput {
+  update: UserUpdateWithoutRemindersDataInput!
+  create: UserCreateWithoutRemindersInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  type: Int
+
+  """All values that are not equal to given value."""
+  type_not: Int
+
+  """All values that are contained in given list."""
+  type_in: [Int!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [Int!]
+
+  """All values less than the given value."""
+  type_lt: Int
+
+  """All values less than or equal the given value."""
+  type_lte: Int
+
+  """All values greater than the given value."""
+  type_gt: Int
+
+  """All values greater than or equal the given value."""
+  type_gte: Int
+  reminders_every: ReminderWhereInput
+  reminders_some: ReminderWhereInput
+  reminders_none: ReminderWhereInput
+  recipient_every: RecipientWhereInput
+  recipient_some: RecipientWhereInput
+  recipient_none: RecipientWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}

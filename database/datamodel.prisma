@@ -1,0 +1,59 @@
+type User {
+  id: ID! @unique
+  email: String @unique
+  name: String!
+  password: String!
+  reminders: [Reminder!]! @relation(name: "RemindersByUser" onDelete: CASCADE)
+  recipient: [Recipient!]! @relation(name: "RecipientOfUser" onDelete: CASCADE)
+  type: Int @default(value: 1)
+}
+
+type Reminder {
+  id: ID! @unique
+  title: String! @default(value: "My reminder")
+  message: String
+  description: String
+  recipients: [Recipient!]
+  author: User! @relation(name: "RemindersByUser")
+  frequency: Cron @relation(name: "CronFrequency" onDelete: CASCADE)
+  sentReminders: [Notification!]! @relation(name: "SentReminder" onDelete: CASCADE)
+  createdAt: DateTime!
+}
+
+type Cron {
+  id: ID! @unique
+  plainText: String!
+
+  """if it's a one time sending no cronText is required"""
+  cronText: String
+  reminder: Reminder! @relation(name: "CronFrequency")
+}
+
+type Recipient {
+  id: ID! @unique
+  name: String!
+  reminders: [Reminder!]
+  contactMethod: ContactMethod @default(value: EMAIL)
+  contactInfo: String
+  user: User! @relation(name: "RecipientOfUser")
+}
+
+type Notification {
+  id: ID! @unique
+  parentReminder: Reminder! @relation(name: "SentReminder")
+  createdAt: DateTime!
+  scheduledDelivery: DateTime!
+  status: Status @default(value: SCHEDULED)
+}
+
+enum Status {
+  SCHEDULED
+  PENDING
+  SUCCESS
+  FAILLURE
+}
+
+enum ContactMethod {
+  EMAIL
+  SMS
+}
